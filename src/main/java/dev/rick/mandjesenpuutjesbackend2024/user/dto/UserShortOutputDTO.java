@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterOutputDTO {
+public class UserShortOutputDTO {
 
     private String username;
     private boolean enabled;
     private String firstname;
+    private UserPreferencesDTO preferences;
 }

@@ -1,5 +1,8 @@
 package dev.rick.mandjesenpuutjesbackend2024.user.models;
 
+import dev.rick.mandjesenpuutjesbackend2024.authority.Authority;
+import dev.rick.mandjesenpuutjesbackend2024.recipe.models.Recipe;
+import dev.rick.mandjesenpuutjesbackend2024.shoppingList.ShoppingList;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,8 +37,8 @@ public class User {
             orphanRemoval = true)
     private Set<Authority> authorities = new HashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private List<ShoppingList> shoppingLists = new ArrayList<>();
+//    @OneToMany(mappedBy = "user")
+//    private List<ShoppingList> shoppingLists = new ArrayList<>();
 
     @ManyToMany
     private List<Recipe> savedRecipes;

@@ -6,12 +6,12 @@ import dev.rick.mandjesenpuutjesbackend2024.recipe.models.Recipe;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserInputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserOutputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserPreferencesDTO;
+import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserShortOutputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.models.User;
 import dev.rick.mandjesenpuutjesbackend2024.user.models.UserPreferences;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import dev.rick.mandjesenpuutjesbackend2024.authority.Authority;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +39,10 @@ public class UserConverter {
         newUser.setFirstname(user.getFirstname());
         newUser.setEnabled(user.isEnabled());
         newUser.setUserPreferencesDTO(convertToUserPreferencesDTO(user.getPreferences()));
-        newUser.setCreatedRecipes(convertSavedRecipesToArrayID(user.getCreatedRecipes()));
         newUser.setSavedRecipes(convertSavedRecipesToArrayID(user.getSavedRecipes()));
+        newUser.setCreatedRecipes(convertSavedRecipesToArrayID(user.getCreatedRecipes()));
+        newUser.setAuthorities(convertAuthoritiesToArray(user.getAuthorities()));
+        return newUser;
     }
 
     public UserPreferences convertToUserPreferences(UserPreferencesDTO userPreferencesDTO) {
@@ -59,6 +61,15 @@ public class UserConverter {
         newUserPreferencesDTO.setShowVegetarian(userPreferences.isShowVegetarian());
         newUserPreferencesDTO.setShowVegan(userPreferences.isShowVegan());
         return newUserPreferencesDTO;
+    }
+
+    public UserShortOutputDTO convertToShortOutputDTO(User user) {
+        UserShortOutputDTO newUserShortOutputDTO = new UserShortOutputDTO();
+        newUserShortOutputDTO.setUsername(user.getUsername());
+        newUserShortOutputDTO.setFirstname(user.getFirstname());
+        newUserShortOutputDTO.setEnabled(user.isEnabled());
+        newUserShortOutputDTO.setPreferences(convertToUserPreferencesDTO(user.getPreferences()));
+        return newUserShortOutputDTO;
     }
 
     public String[] convertAuthoritiesToArray(Set<Authority> authorities) {
