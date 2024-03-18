@@ -1,5 +1,6 @@
 package dev.rick.mandjesenpuutjesbackend2024.recipe.models;
 
+import dev.rick.mandjesenpuutjesbackend2024.user.models.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,8 +28,8 @@ public class Recipe {
 
     private String imageFile;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    private PrepTime prepTime;
+//    @OneToOne(fetch = FetchType.EAGER)
+//    private PrepTime prepTime;
 
     @ElementCollection
     @CollectionTable(
@@ -42,14 +43,14 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"))
     private List<String> supplies = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "recipes")
-    private List<IngredientName> ingredients = new ArrayList<>();
+//    @ManyToMany(mappedBy = "recipes")
+//    private List<IngredientName> ingredients = new ArrayList<>();
 
-    @ElementCollection
-    @CollectionTable(
-            name = "recipe_ingredients_measured",
-            joinColumns = @JoinColumn(name = "recipe_id"))
-    private List<IngredientMeasured> ingredientsMeasured = new ArrayList<>();
+//    @ElementCollection
+//    @CollectionTable(
+//            name = "recipe_ingredients_measured",
+//            joinColumns = @JoinColumn(name = "recipe_id"))
+//    private List<IngredientMeasured> ingredientsMeasured = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(
