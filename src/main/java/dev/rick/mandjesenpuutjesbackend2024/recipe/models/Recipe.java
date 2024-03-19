@@ -28,8 +28,10 @@ public class Recipe {
 
     private String imageFile;
 
-//    @OneToOne(fetch = FetchType.EAGER)
-//    private PrepTime prepTime;
+    private PrepTime prepTime;
+
+    @Embedded
+    private Diet diet;
 
     @ElementCollection
     @CollectionTable(
@@ -43,14 +45,11 @@ public class Recipe {
             joinColumns = @JoinColumn(name = "recipe_id"))
     private List<String> supplies = new ArrayList<>();
 
-//    @ManyToMany(mappedBy = "recipes")
-//    private List<IngredientName> ingredients = new ArrayList<>();
-
-//    @ElementCollection
-//    @CollectionTable(
-//            name = "recipe_ingredients_measured",
-//            joinColumns = @JoinColumn(name = "recipe_id"))
-//    private List<IngredientMeasured> ingredientsMeasured = new ArrayList<>();
+    @ElementCollection
+    @CollectionTable(
+            name = "recipe_ingredients",
+            joinColumns = @JoinColumn(name = "recipe_id"))
+    List<Ingredient> ingredients = new ArrayList<>();
 
     @ElementCollection
     @CollectionTable(

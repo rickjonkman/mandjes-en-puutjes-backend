@@ -10,6 +10,8 @@ import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserOutputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserShortOutputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.models.User;
 import lombok.AllArgsConstructor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.security.Principal;
@@ -113,6 +115,7 @@ public class UserService {
 
         return listOfAuthorities.contains("ADMIN");
     }
+
 
     public User findUserByUsername(String username) {
         Optional<User> optionalUser = userRepo.findById(username);
