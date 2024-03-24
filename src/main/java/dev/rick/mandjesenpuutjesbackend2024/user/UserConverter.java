@@ -39,8 +39,6 @@ public class UserConverter {
         newUser.setFirstname(user.getFirstname());
         newUser.setEnabled(user.isEnabled());
         newUser.setUserPreferencesDTO(convertToUserPreferencesDTO(user.getPreferences()));
-        newUser.setSavedRecipes(convertSavedRecipesToArrayID(user.getSavedRecipes()));
-        newUser.setCreatedRecipes(convertSavedRecipesToArrayID(user.getCreatedRecipes()));
         newUser.setAuthorities(convertAuthoritiesToArray(user.getAuthorities()));
         return newUser;
     }
@@ -49,7 +47,7 @@ public class UserConverter {
         UserPreferences newUserPreferences = new UserPreferences();
         newUserPreferences.setShowMeat(userPreferencesDTO.isShowMeat());
         newUserPreferences.setShowFish(userPreferencesDTO.isShowFish());
-        newUserPreferences.setShowVegetarian(userPreferencesDTO.isShowVegetarian());
+        newUserPreferences.setShowVegetarian(userPreferencesDTO.isShowVega());
         newUserPreferences.setShowVegan(userPreferencesDTO.isShowVegan());
         return newUserPreferences;
     }
@@ -58,7 +56,7 @@ public class UserConverter {
         UserPreferencesDTO newUserPreferencesDTO = new UserPreferencesDTO();
         newUserPreferencesDTO.setShowMeat(userPreferences.isShowMeat());
         newUserPreferencesDTO.setShowFish(userPreferences.isShowFish());
-        newUserPreferencesDTO.setShowVegetarian(userPreferences.isShowVegetarian());
+        newUserPreferencesDTO.setShowVega(userPreferences.isShowVegetarian());
         newUserPreferencesDTO.setShowVegan(userPreferences.isShowVegan());
         return newUserPreferencesDTO;
     }

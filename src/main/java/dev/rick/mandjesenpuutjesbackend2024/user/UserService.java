@@ -7,6 +7,7 @@ import dev.rick.mandjesenpuutjesbackend2024.exceptions.NotAuthorizedException;
 import dev.rick.mandjesenpuutjesbackend2024.exceptions.RecordNotFoundException;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserInputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserOutputDTO;
+import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserPreferencesDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserShortOutputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.models.User;
 import lombok.AllArgsConstructor;
@@ -74,6 +75,18 @@ public class UserService {
         User existingUser = findUserByUsername(username);
         if (existingUser != null) {
             existingUser.addAuthority(converter.convertToAuthority(authorityDTO));
+            userRepo.save(existingUser);
+
+            return converter.convertToShortOutputDTO(existingUser);
+        } else {
+            throw new RecordNotFoundException(username);
+        }
+    }
+
+    public UserShortOutputDTO changeUserPreferences(String username, UserPreferencesDTO preferences) {
+        User existingUser = findUserByUsername(username);
+        if (existingUser != null) {
+            existingUser.setPreferences(converter.convertToUserPreferences(preferences));
             userRepo.save(existingUser);
 
             return converter.convertToShortOutputDTO(existingUser);

@@ -26,16 +26,12 @@ public class ShoppingListService {
     public List<ShoppingListOutputDTO> getShoppingLists(String username) {
         List<ShoppingList> foundLists = findShoppingListsByUsername(username);
 
-        if (foundLists == null || foundLists.isEmpty()) {
-            throw new NothingFoundForUserException(username);
-        } else {
-            List<ShoppingListOutputDTO> outputLists = new ArrayList<>();
-            for (ShoppingList shoppingList : foundLists) {
-                ShoppingListOutputDTO singleDTOList = converter.convertToDTO(shoppingList);
-                outputLists.add(singleDTOList);
-            }
-            return outputLists;
+        List<ShoppingListOutputDTO> outputLists = new ArrayList<>();
+        for (ShoppingList shoppingList : foundLists) {
+            ShoppingListOutputDTO singleDTOList = converter.convertToDTO(shoppingList);
+            outputLists.add(singleDTOList);
         }
+        return outputLists;
     }
 
     public ShoppingListOutputDTO addNewShoppingList(ShoppingListInputDTO shoppingListInputDTO, String username) {

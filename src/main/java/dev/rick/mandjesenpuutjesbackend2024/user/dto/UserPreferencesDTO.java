@@ -12,6 +12,6 @@ public class UserPreferencesDTO {
 
     private boolean showMeat;
     private boolean showFish;
-    private boolean showVegetarian;
+    private boolean showVega;
     private boolean showVegan;
 }

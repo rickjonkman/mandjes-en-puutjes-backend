@@ -2,8 +2,10 @@ package dev.rick.mandjesenpuutjesbackend2024.user;
 
 
 import dev.rick.mandjesenpuutjesbackend2024.authority.AuthorityDTO;
+import dev.rick.mandjesenpuutjesbackend2024.exceptions.NotAuthorizedException;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserInputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserOutputDTO;
+import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserPreferencesDTO;
 import dev.rick.mandjesenpuutjesbackend2024.user.dto.UserShortOutputDTO;
 import dev.rick.mandjesenpuutjesbackend2024.utils.InputValidator;
 import jakarta.validation.Valid;
@@ -13,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.security.Principal;
 
+@CrossOrigin
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/v1")
@@ -39,11 +43,12 @@ public class UserController {
 
         UserOutputDTO outputDTO = userService.addAuthorityToRegisteredUser(authorityDTO);
 
-        return ResponseEntity.created(ServletUriComponentsBuilder
-                        .fromCurrentRequest()
-                        .path("/api/v1/user/"+outputDTO.getUsername())
-                        .build().toUri())
-                .body(outputDTO);
+        URI uri = URI.create(ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/api/v1/users?username=" + outputDTO.getUsername())
+                .toUriString());
+
+        return ResponseEntity.created(uri).body(outputDTO);
 
     }
 
@@ -77,7 +82,15 @@ public class UserController {
         }
     }
 
-
+    @PutMapping("/user/update-preferences")
+    public ResponseEntity<UserShortOutputDTO> changeUserPreferences(Principal principal, @RequestParam(name = "username") String username, @RequestBody UserPreferencesDTO preferences) {
+        if (principal.getName().equals(username)) {
+            UserShortOutputDTO outputDTO = userService.changeUserPreferences(username, preferences);
+            return ResponseEntity.ok(outputDTO);
+        } else {
+            throw new NotAuthorizedException();
+        }
+    }
 
     @DeleteMapping("/admin/delete-user")
     public ResponseEntity<String> deleteUserAsAdmin(Principal principal, @RequestParam(name = "username") String username) {

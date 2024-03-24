@@ -60,10 +60,12 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/api/v1/user/**").authenticated()
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/user/**").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/user/**").authenticated()
-                                .requestMatchers(HttpMethod.POST, "/api/v1/shopping-lists/add-new").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/shopping-lists/**").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/api/v1/shopping-lists/**").authenticated()
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/shopping-lists/**").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/shopping-lists/**").authenticated()
+                                .requestMatchers(HttpMethod.PUT, "/api/v1/recipes/auth/**").authenticated()
+                                .requestMatchers(HttpMethod.DELETE, "/api/v1/recipes/auth/**").authenticated()
 
 //                        PERMITTED TO ALL USERS
                                 .requestMatchers(HttpMethod.POST, "/api/v1/recipes/add-new").hasRole("USER")

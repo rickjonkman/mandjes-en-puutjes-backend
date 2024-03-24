@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Embeddable
-public class Diet {
+public class   Diet {
 
     private boolean meat;
     private boolean fish;

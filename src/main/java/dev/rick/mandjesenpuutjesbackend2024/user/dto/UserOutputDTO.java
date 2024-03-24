@@ -15,6 +15,4 @@ public class UserOutputDTO {
     private boolean enabled;
     private UserPreferencesDTO userPreferencesDTO;
     private String[] authorities;
-    private long[] savedRecipes;
-    private long[] createdRecipes;
 }

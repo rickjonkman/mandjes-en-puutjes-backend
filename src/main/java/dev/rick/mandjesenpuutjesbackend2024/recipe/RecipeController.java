@@ -19,7 +19,7 @@ import java.util.List;
 public class RecipeController {
 
     private final RecipeService recipeService;
-    private final RecipeConverter converter;
+
 
     @PostMapping("/add-new")
     public ResponseEntity<RecipeOutputDTO> addNewRecipe(Principal principal, RecipeInputDTO inputDTO) {
@@ -51,14 +51,14 @@ public class RecipeController {
         return ResponseEntity.ok(outputList);
     }
 
-    @PutMapping("/update-recipe/{recipeId}")
+    @PutMapping("/auth/update-recipe/{recipeId}")
     public ResponseEntity<RecipeOutputDTO> updateRecipe(
             @PathVariable Long recipeId, @RequestBody RecipeInputDTO inputDTO, Principal principal) {
         RecipeOutputDTO outputDTO = recipeService.updateRecipeById(recipeId, inputDTO, principal);
         return ResponseEntity.ok(outputDTO);
     }
 
-    @DeleteMapping("/delete-recipe/{recipeId}")
+    @DeleteMapping("/auth/delete-recipe/{recipeId}")
     public ResponseEntity<?> deleteRecipe(@PathVariable Long recipeId, Principal principal) {
         recipeService.deleteRecipeById(recipeId, principal);
         return ResponseEntity.noContent().build();

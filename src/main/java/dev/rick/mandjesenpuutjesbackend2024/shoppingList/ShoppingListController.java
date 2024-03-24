@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Objects;
 
 @RestController
-@RequestMapping("/api/v1/shoppinglists")
+@RequestMapping("/api/v1/shopping-lists")
 @AllArgsConstructor
 public class ShoppingListController {
 
