@@ -66,9 +66,8 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/shopping-lists/**").authenticated()
                                 .requestMatchers(HttpMethod.PUT, "/api/v1/recipes/auth/**").authenticated()
                                 .requestMatchers(HttpMethod.DELETE, "/api/v1/recipes/auth/**").authenticated()
+                                .requestMatchers(HttpMethod.POST, "/api/v1/recipes/add-new").authenticated()
 
-//                        PERMITTED TO ALL USERS
-                                .requestMatchers(HttpMethod.POST, "/api/v1/recipes/add-new").hasRole("USER")
 
 //                        OPEN TO ALL
                                 .requestMatchers(HttpMethod.POST, "/api/v1/products/open/**").permitAll()

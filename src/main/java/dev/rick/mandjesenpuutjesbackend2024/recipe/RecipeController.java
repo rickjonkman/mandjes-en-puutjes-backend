@@ -22,7 +22,7 @@ public class RecipeController {
 
 
     @PostMapping("/add-new")
-    public ResponseEntity<RecipeOutputDTO> addNewRecipe(Principal principal, RecipeInputDTO inputDTO) {
+    public ResponseEntity<RecipeOutputDTO> addNewRecipe(Principal principal, @RequestBody RecipeInputDTO inputDTO) {
         RecipeOutputDTO outputDTO = recipeService.addRecipe(inputDTO, principal.getName());
 
         URI uri = URI.create(
